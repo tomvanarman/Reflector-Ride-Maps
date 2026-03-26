@@ -277,8 +277,8 @@ function searchAndHighlightTrip(searchTerm) {
   tripLayers.forEach(id => {
     try {
       if (matchingTrips.includes(id)) {
-        map.setPaintProperty(id, 'line-opacity', 1.0);
-        map.setPaintProperty(id, 'line-width', 5);
+        map.setPaintProperty(id, 'line-opacity', 0.85);
+        map.setPaintProperty(id, 'line-width', 3);
         map.setPaintProperty(id, 'line-color', '#FF69B4'); // hot pink for all matches
       } else {
         map.setPaintProperty(id, 'line-opacity', 0.12);

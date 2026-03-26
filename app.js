@@ -279,6 +279,7 @@ function clearSearch() {
 }
 
 
+function showSelection(layerId) {
   console.log('Showing selection for:', layerId);
   document.getElementById('resetButton').style.display = 'block';
   document.getElementById('statTripRow').style.display = 'none';

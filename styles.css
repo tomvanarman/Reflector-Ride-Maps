@@ -148,6 +148,18 @@ input[type="radio"] {
   background: #e8e8e8;
 }
 
+#tripClearButton {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #b91c1c;
+  font-size: 12px;
+  padding: 5px 8px;
+}
+
+#tripClearButton:hover {
+  background: #fecaca;
+}
+
 #searchSuggestions {
   display: none;
   position: absolute;

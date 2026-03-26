@@ -31,6 +31,7 @@ let analysisMode = 'safety';            // 'safety', 'efficiency', or 'overall' 
 let trafficLightInfoShown = false;      // Track if info popup has been shown
 let showAveragedSegments = false;       // Toggle for averaged road segments layer
 let averagedSegmentMode = 'composite';  // 'speed', 'quality', or 'composite' for segment visualization
+let searchActive = false;               // True when a search filter is currently applied
 
 const DEFAULT_COLOR = '#FF6600';        
 
@@ -237,7 +238,47 @@ function resetSelection() {
   document.getElementById('statTotalTimeRow').style.display = 'flex';
 }
 
-function showSelection(layerId) {
+function clearSearch() {
+  searchActive = false;
+  selectedTrip = null;
+
+  const searchInput = document.getElementById('tripSearchInput');
+  const clearBtn = document.getElementById('tripClearButton');
+  if (searchInput) searchInput.value = '';
+  if (clearBtn) clearBtn.style.display = 'none';
+
+  if (currentPopup) {
+    currentPopup.remove();
+    currentPopup = null;
+  }
+
+  // Restore all trips to full opacity with whatever layer colour is active
+  tripLayers.forEach(layerId => {
+    try {
+      map.setPaintProperty(layerId, 'line-opacity', 0.7);
+      map.setPaintProperty(layerId, 'line-width', 3);
+      if (showSpeedColors) {
+        map.setPaintProperty(layerId, 'line-color', getSpeedColorExpression(speedMode));
+      } else if (showRoadQuality) {
+        map.setPaintProperty(layerId, 'line-color', getRoadQualityColorExpression());
+      } else {
+        map.setPaintProperty(layerId, 'line-color', DEFAULT_COLOR);
+      }
+    } catch (err) {
+      console.error('Error clearing search on layer:', layerId, err);
+    }
+  });
+
+  // Reset stats panel
+  document.getElementById('resetButton').style.display = 'none';
+  document.getElementById('selectedTripRow').style.display = 'none';
+  document.getElementById('statTripRow').style.display = 'flex';
+  document.getElementById('statDistanceRow').style.display = 'flex';
+  document.getElementById('statAvgSpeedRow').style.display = 'flex';
+  document.getElementById('statTotalTimeRow').style.display = 'flex';
+}
+
+
   console.log('Showing selection for:', layerId);
   document.getElementById('resetButton').style.display = 'block';
   document.getElementById('statTripRow').style.display = 'none';
@@ -273,6 +314,10 @@ function searchAndHighlightTrip(searchTerm) {
   const isGroupSearch = matchingTrips.length > 1;
 
   selectedTrip = isGroupSearch ? null : matchingTrips[0];
+  searchActive = true;
+
+  const clearBtn = document.getElementById('tripClearButton');
+  if (clearBtn) clearBtn.style.display = 'inline-block';
 
   tripLayers.forEach(id => {
     try {
@@ -675,6 +720,14 @@ function setupControls() {
       searchAndHighlightTrip(searchInput.value);
     });
 
+    const clearButton = document.getElementById('tripClearButton');
+    if (clearButton) {
+      clearButton.addEventListener('click', () => {
+        hideSuggestions();
+        clearSearch();
+      });
+    }
+
     searchInput.addEventListener('keypress', (e) => {
       if (e.key === 'Enter') {
         hideSuggestions();
@@ -900,10 +953,14 @@ function setupClickHandlers() {
     });
   });
   
-  // Click anywhere on map to deselect trip
+  // Click anywhere on map to deselect trip or clear search
   map.on('click', (e) => {
-    if (!e.defaultPrevented && selectedTrip && !showTrafficLights) {
-      resetSelection();
+    if (!e.defaultPrevented && !showTrafficLights) {
+      if (searchActive) {
+        clearSearch();
+      } else if (selectedTrip) {
+        resetSelection();
+      }
     }
   });
 }

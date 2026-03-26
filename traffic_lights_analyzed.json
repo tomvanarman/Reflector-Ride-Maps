@@ -5113,7 +5113,7 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 34,
+        "total_points": 52,
         "sudden_brakes": 0,
         "extended_stops": 0,
         "safety_score": 0,
@@ -6105,12 +6105,12 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 70,
+        "total_points": 104,
         "sudden_brakes": 0,
         "extended_stops": 4,
         "safety_score": 0,
-        "efficiency_score": 11.43,
-        "overall_score": 4.57
+        "efficiency_score": 7.69,
+        "overall_score": 3.08
       }
     },
     {
@@ -8600,13 +8600,13 @@
         "SELECTIE": "BEDRIJF",
         "Foto": "",
         "Weblink": "",
-        "has_data": false,
-        "total_points": 0,
+        "has_data": true,
+        "total_points": 30,
         "sudden_brakes": 0,
         "extended_stops": 0,
         "safety_score": 0,
-        "efficiency_score": 0,
-        "overall_score": 0
+        "efficiency_score": 0.0,
+        "overall_score": 0.0
       }
     },
     {

@@ -1700,5 +1700,21 @@
     "Trip start/end": ", 2025-11-29 19:23:40.524, 2025-11-29 19:32:14.025",
     "SENSOR": ",08:26,02:31,1.80,12.8,18.3,29.2,-2.35,4.18,--,2",
     "GNSS": ",08:33,01:39,1.68,12,15,27,,,,,5"
+  },
+  "TEST__Trip1": {
+    "source_file": "TEST_20251204_103040.csv",
+    "Charge(start | stop)": ", 73 | 73%",
+    "WheelDiam": ", 27.992141723632812 inch",
+    "Frequency": ", 50.0 Hz",
+    "Trip stop code": ", 5 (BLE device search timer expired after trip started)",
+    "BLE Device Information Service": "BLE Device Information Service",
+    "Hardware": ", 304",
+    "Firmware": ",9.1.0",
+    "SystemID": ", DC8E95FFFE7602CA",
+    "App version": ", 1.1.4+32",
+    "Sensor's connection": ", 2025-12-04 10:30:30.537, 2025-12-04 10:39:46.151",
+    "Trip start/end": ", 2025-12-04 10:30:40.108, 2025-12-04 10:39:46.191",
+    "SENSOR": ",08:54,01:04,2.61,17.6,20.0,31.2,-1.88,3.75,--,5",
+    "GNSS": ",09:06,00:12,2.647,17,18,30,,,,,0"
   }
 }

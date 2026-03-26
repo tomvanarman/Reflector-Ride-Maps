@@ -255,48 +255,68 @@ function searchAndHighlightTrip(searchTerm) {
     resetSelection();
     return;
   }
-  
+
   const normalizedSearch = searchTerm.toLowerCase().trim();
-  const matchingTrip = tripLayers.find(layerId => layerId.toLowerCase().includes(normalizedSearch));
-  
-  if (matchingTrip) {
-    console.log('🎯 Found trip:', matchingTrip);
-    selectedTrip = matchingTrip;
-    
-    // Highlight selected trip, dim others
-    tripLayers.forEach(id => {
-      try {
-        if (id === matchingTrip) {
-          map.setPaintProperty(id, 'line-opacity', 1.0);
-          map.setPaintProperty(id, 'line-width', 5);
-          map.setPaintProperty(id, 'line-color', '#FF00FF');
-        } else {
-          map.setPaintProperty(id, 'line-opacity', 0.15);
-          map.setPaintProperty(id, 'line-width', 2);
-        }
-      } catch (err) {
-        console.error('Error updating layer:', id, err);
-      }
-    });
-    
-    showSelection(matchingTrip);
-    
-    // Zoom to selected trip
-    try {
-      const features = map.querySourceFeatures('trips', { sourceLayer: matchingTrip });
-      if (features.length > 0) {
-        const bbox = turf.bbox({ type: 'FeatureCollection', features: features });
-        map.fitBounds(bbox, { padding: 50, duration: 1000 });
-      }
-    } catch (err) {
-      console.error('Error zooming to trip:', err);
-    }
-    return true;
-  } else {
+
+  // Find all trips that match the search term
+  const matchingTrips = tripLayers.filter(layerId =>
+    layerId.toLowerCase().includes(normalizedSearch)
+  );
+
+  if (matchingTrips.length === 0) {
     console.log('❌ No trip found matching:', searchTerm);
     alert(`No trip found matching: ${searchTerm}`);
     return false;
   }
+
+  // Multiple matches = sensor-group search; single match = exact trip
+  const isGroupSearch = matchingTrips.length > 1;
+
+  selectedTrip = isGroupSearch ? null : matchingTrips[0];
+
+  tripLayers.forEach(id => {
+    try {
+      if (matchingTrips.includes(id)) {
+        map.setPaintProperty(id, 'line-opacity', 1.0);
+        map.setPaintProperty(id, 'line-width', 5);
+        map.setPaintProperty(id, 'line-color', '#FF69B4'); // hot pink for all matches
+      } else {
+        map.setPaintProperty(id, 'line-opacity', 0.12);
+        map.setPaintProperty(id, 'line-width', 2);
+      }
+    } catch (err) {
+      console.error('Error updating layer:', id, err);
+    }
+  });
+
+  if (isGroupSearch) {
+    // Show group summary in stats panel
+    document.getElementById('resetButton').style.display = 'block';
+    document.getElementById('statTripRow').style.display = 'none';
+    document.getElementById('statDistanceRow').style.display = 'none';
+    document.getElementById('statAvgSpeedRow').style.display = 'none';
+    document.getElementById('statTotalTimeRow').style.display = 'none';
+    document.getElementById('selectedTripRow').style.display = 'flex';
+    document.getElementById('selectedTrip').textContent =
+      `${searchTerm.toUpperCase()} — ${matchingTrips.length} trips`;
+  } else {
+    showSelection(matchingTrips[0]);
+  }
+
+  // Zoom to fit all matched trips
+  try {
+    const allFeatures = matchingTrips.flatMap(tripId =>
+      map.querySourceFeatures('trips', { sourceLayer: tripId })
+    );
+    if (allFeatures.length > 0) {
+      const bbox = turf.bbox({ type: 'FeatureCollection', features: allFeatures });
+      map.fitBounds(bbox, { padding: 50, duration: 1000 });
+    }
+  } catch (err) {
+    console.error('Error zooming to trips:', err);
+  }
+
+  return true;
 }
 
 // Layer update functions
@@ -582,10 +602,90 @@ function setupControls() {
   
   const searchInput = document.getElementById('tripSearchInput');
   const searchButton = document.getElementById('tripSearchButton');
-  
-  if (searchInput && searchButton) {
-    searchButton.addEventListener('click', () => { searchAndHighlightTrip(searchInput.value); });
-    searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchAndHighlightTrip(searchInput.value); });
+  const suggestionBox = document.getElementById('searchSuggestions');
+
+  if (searchInput && searchButton && suggestionBox) {
+
+    // --- Autocomplete helpers ---
+
+    // Extract unique sensor prefixes (everything before the first underscore)
+    function getSensorNames() {
+      return [...new Set(tripLayers.map(id => id.split('_')[0]))].sort();
+    }
+
+    function hideSuggestions() {
+      suggestionBox.style.display = 'none';
+      suggestionBox.innerHTML = '';
+    }
+
+    function showSuggestions(query) {
+      const q = query.trim().toLowerCase();
+      suggestionBox.innerHTML = '';
+
+      if (!q) { hideSuggestions(); return; }
+
+      const sensorNames = getSensorNames();
+
+      // Sensor-level matches (e.g. "602" matches "602CA")
+      const sensorMatches = sensorNames.filter(s => s.toLowerCase().startsWith(q));
+
+      // Full trip-level matches not already covered by a sensor match
+      const tripMatches = tripLayers.filter(id => {
+        const lower = id.toLowerCase();
+        return lower.startsWith(q) && !sensorMatches.some(s => id.startsWith(s));
+      });
+
+      if (sensorMatches.length === 0 && tripMatches.length === 0) {
+        hideSuggestions();
+        return;
+      }
+
+      sensorMatches.forEach(sensor => {
+        const count = tripLayers.filter(id => id.startsWith(sensor)).length;
+        const li = document.createElement('li');
+        li.textContent = `📡 ${sensor}  (${count} trip${count !== 1 ? 's' : ''})`;
+        li.className = 'suggestion-sensor';
+        li.addEventListener('mousedown', () => {   // mousedown fires before blur
+          searchInput.value = sensor;
+          hideSuggestions();
+          searchAndHighlightTrip(sensor);
+        });
+        suggestionBox.appendChild(li);
+      });
+
+      tripMatches.forEach(tripId => {
+        const li = document.createElement('li');
+        li.textContent = `🚴 ${tripId}`;
+        li.className = 'suggestion-trip';
+        li.addEventListener('mousedown', () => {
+          searchInput.value = tripId;
+          hideSuggestions();
+          searchAndHighlightTrip(tripId);
+        });
+        suggestionBox.appendChild(li);
+      });
+
+      suggestionBox.style.display = 'block';
+    }
+
+    // --- Event listeners ---
+
+    searchButton.addEventListener('click', () => {
+      hideSuggestions();
+      searchAndHighlightTrip(searchInput.value);
+    });
+
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        hideSuggestions();
+        searchAndHighlightTrip(searchInput.value);
+      }
+    });
+
+    searchInput.addEventListener('input', (e) => showSuggestions(e.target.value));
+    searchInput.addEventListener('focus', (e) => { if (e.target.value) showSuggestions(e.target.value); });
+    // Delay hide so mousedown on a suggestion fires first
+    searchInput.addEventListener('blur', () => setTimeout(hideSuggestions, 150));
   }
   
   const speedColorsCheckbox = document.getElementById('speedColorsCheckbox');

@@ -139,10 +139,12 @@
 
     <div class="control-group">
       <label>🔍 Find Trip:</label>
-      <div style="display: flex; gap: 5px;">
-        <input type="text" id="tripSearchInput" placeholder="e.g., 602CA_Trip1" 
-              style="flex: 1; padding: 5px; border: 1px solid #ccc; border-radius: 4px;">
-        <button id="tripSearchButton" style="padding: 5px 10px;">Search</button>
+      <div class="search-wrapper">
+        <div class="search-input-row">
+          <input type="text" id="tripSearchInput" placeholder="e.g., 602CA or 602CA_Trip1" autocomplete="off">
+          <button id="tripSearchButton">Search</button>
+        </div>
+        <ul id="searchSuggestions"></ul>
       </div>
     </div>
     
@@ -200,7 +202,7 @@
       </label>
     </div>
 
-    <div class="radio-group" id="averagedModeGroup" style="display: none;">
+    <div class="radio-group" id="averagedModeGroup">
       <label class="radio-label">
         <input type="radio" name="averagedMode" value="composite" checked>
         Composite Score (Quality + Speed)
@@ -346,14 +348,12 @@
     </div>
   </div>
 
-  <div class="legend" id="averagedSegmentsLegend" style="display: none;">
+  <div class="legend" id="averagedSegmentsLegend">
     <h4>Averaged Road Segments</h4>
     
     <!-- Composite Score Legend (default) -->
     <div id="compositeLegendItems">
-      <p style="font-size: 11px; margin: 0 0 8px 0; color: #666;">
-        Combined score based on quality and speed
-      </p>
+      <p class="legend-note">Combined score based on quality and speed</p>
       <div class="speed-legend-item">
         <div class="speed-color-box" style="background: #22C55E;"></div>
         <span>Excellent (0-20)</span>
@@ -377,7 +377,7 @@
     </div>
     
     <!-- Speed Legend -->
-    <div id="avgSpeedLegendItems" style="display: none;">
+    <div id="avgSpeedLegendItems">
       <div class="speed-legend-item">
         <div class="speed-color-box" style="background: #DC2626;"></div>
         <span>Very Slow (0-5 km/h)</span>
@@ -405,7 +405,7 @@
     </div>
     
     <!-- Quality Legend -->
-    <div id="avgQualityLegendItems" style="display: none;">
+    <div id="avgQualityLegendItems">
       <div class="speed-legend-item">
         <div class="speed-color-box" style="background: #22C55E;"></div>
         <span>Perfect (1.0-1.5)</span>

@@ -1849,12 +1849,12 @@
         "Foto": "",
         "Weblink": "https://archief.amsterdam/beeldbank/detail/0a489b56-d482-3576-72c0-65d25bb2fb28",
         "has_data": true,
-        "total_points": 424,
-        "sudden_brakes": 0,
-        "extended_stops": 6,
-        "safety_score": 0,
-        "efficiency_score": 2.83,
-        "overall_score": 1.13
+        "total_points": 473,
+        "sudden_brakes": 2,
+        "extended_stops": 9,
+        "safety_score": 30,
+        "efficiency_score": 3.81,
+        "overall_score": 19.52
       }
     },
     {
@@ -1880,13 +1880,13 @@
         "SELECTIE": "VERVALLEN",
         "Foto": "",
         "Weblink": "",
-        "has_data": false,
-        "total_points": 0,
-        "sudden_brakes": 0,
-        "extended_stops": 0,
-        "safety_score": 0,
-        "efficiency_score": 0,
-        "overall_score": 0
+        "has_data": true,
+        "total_points": 24,
+        "sudden_brakes": 1,
+        "extended_stops": 3,
+        "safety_score": 15,
+        "efficiency_score": 25.0,
+        "overall_score": 19.0
       }
     },
     {
@@ -4441,12 +4441,12 @@
         "Foto": "",
         "Weblink": "http://beeldbank.amsterdam.nl/afbeelding/010009008170",
         "has_data": true,
-        "total_points": 48,
-        "sudden_brakes": 1,
-        "extended_stops": 4,
-        "safety_score": 15,
-        "efficiency_score": 16.67,
-        "overall_score": 15.67
+        "total_points": 78,
+        "sudden_brakes": 2,
+        "extended_stops": 8,
+        "safety_score": 30,
+        "efficiency_score": 20.51,
+        "overall_score": 26.21
       }
     },
     {
@@ -5625,12 +5625,12 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 36,
-        "sudden_brakes": 0,
-        "extended_stops": 0,
-        "safety_score": 0,
-        "efficiency_score": 0.0,
-        "overall_score": 0.0
+        "total_points": 125,
+        "sudden_brakes": 1,
+        "extended_stops": 5,
+        "safety_score": 15,
+        "efficiency_score": 8.0,
+        "overall_score": 12.2
       }
     },
     {
@@ -6873,12 +6873,12 @@
         "Foto": "",
         "Weblink": "https://stadsarchief.amsterdam.nl/",
         "has_data": true,
-        "total_points": 108,
+        "total_points": 186,
         "sudden_brakes": 2,
-        "extended_stops": 8,
+        "extended_stops": 10,
         "safety_score": 30,
-        "efficiency_score": 14.81,
-        "overall_score": 23.93
+        "efficiency_score": 10.75,
+        "overall_score": 22.3
       }
     },
     {
@@ -7416,13 +7416,13 @@
         "SELECTIE": "BEDRIJF",
         "Foto": "",
         "Weblink": "",
-        "has_data": false,
-        "total_points": 0,
-        "sudden_brakes": 0,
-        "extended_stops": 0,
-        "safety_score": 0,
-        "efficiency_score": 0,
-        "overall_score": 0
+        "has_data": true,
+        "total_points": 78,
+        "sudden_brakes": 3,
+        "extended_stops": 6,
+        "safety_score": 45,
+        "efficiency_score": 15.38,
+        "overall_score": 33.15
       }
     },
     {
@@ -7641,12 +7641,12 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 48,
-        "sudden_brakes": 0,
-        "extended_stops": 0,
-        "safety_score": 0,
-        "efficiency_score": 0.0,
-        "overall_score": 0.0
+        "total_points": 88,
+        "sudden_brakes": 1,
+        "extended_stops": 2,
+        "safety_score": 15,
+        "efficiency_score": 4.55,
+        "overall_score": 10.82
       }
     },
     {
@@ -9689,12 +9689,12 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 64,
+        "total_points": 176,
         "sudden_brakes": 0,
-        "extended_stops": 0,
+        "extended_stops": 8,
         "safety_score": 0,
-        "efficiency_score": 0.0,
-        "overall_score": 0.0
+        "efficiency_score": 9.09,
+        "overall_score": 3.64
       }
     },
     {
@@ -13177,12 +13177,12 @@
         "Foto": "",
         "Weblink": "http://disseminate.objectrepository.org/file/level2/10622/30051002128285",
         "has_data": true,
-        "total_points": 62,
+        "total_points": 179,
         "sudden_brakes": 0,
-        "extended_stops": 0,
+        "extended_stops": 4,
         "safety_score": 0,
-        "efficiency_score": 0.0,
-        "overall_score": 0.0
+        "efficiency_score": 4.47,
+        "overall_score": 1.79
       }
     },
     {
@@ -13657,12 +13657,12 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 210,
+        "total_points": 295,
         "sudden_brakes": 0,
-        "extended_stops": 4,
+        "extended_stops": 8,
         "safety_score": 0,
-        "efficiency_score": 3.81,
-        "overall_score": 1.52
+        "efficiency_score": 5.42,
+        "overall_score": 2.17
       }
     },
     {
@@ -13689,12 +13689,12 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 132,
+        "total_points": 159,
         "sudden_brakes": 0,
         "extended_stops": 6,
         "safety_score": 0,
-        "efficiency_score": 9.09,
-        "overall_score": 3.64
+        "efficiency_score": 7.55,
+        "overall_score": 3.02
       }
     },
     {
@@ -15545,12 +15545,12 @@
         "Foto": "",
         "Weblink": "https://archief.amsterdam/beeldbank/detail/446e4ba1-9948-fa11-2412-0a6e7e098f4c",
         "has_data": true,
-        "total_points": 328,
+        "total_points": 360,
         "sudden_brakes": 0,
-        "extended_stops": 9,
+        "extended_stops": 11,
         "safety_score": 0,
-        "efficiency_score": 5.49,
-        "overall_score": 2.2
+        "efficiency_score": 6.11,
+        "overall_score": 2.44
       }
     },
     {
@@ -15609,12 +15609,12 @@
         "Foto": "",
         "Weblink": "https://archief.amsterdam/beeldbank/detail/0c336bee-6dfa-3384-6a7e-7f3f816ecebe",
         "has_data": true,
-        "total_points": 682,
+        "total_points": 728,
         "sudden_brakes": 5,
-        "extended_stops": 36,
+        "extended_stops": 40,
         "safety_score": 75,
-        "efficiency_score": 10.56,
-        "overall_score": 49.22
+        "efficiency_score": 10.99,
+        "overall_score": 49.4
       }
     },
     {
@@ -16505,7 +16505,7 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 74,
+        "total_points": 94,
         "sudden_brakes": 0,
         "extended_stops": 0,
         "safety_score": 0,
@@ -16601,12 +16601,12 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 104,
-        "sudden_brakes": 0,
-        "extended_stops": 0,
-        "safety_score": 0,
-        "efficiency_score": 0.0,
-        "overall_score": 0.0
+        "total_points": 110,
+        "sudden_brakes": 1,
+        "extended_stops": 1,
+        "safety_score": 15,
+        "efficiency_score": 1.82,
+        "overall_score": 9.73
       }
     },
     {
@@ -16633,12 +16633,12 @@
         "Foto": "",
         "Weblink": "",
         "has_data": true,
-        "total_points": 104,
-        "sudden_brakes": 0,
-        "extended_stops": 2,
-        "safety_score": 0,
-        "efficiency_score": 3.85,
-        "overall_score": 1.54
+        "total_points": 136,
+        "sudden_brakes": 1,
+        "extended_stops": 5,
+        "safety_score": 15,
+        "efficiency_score": 7.35,
+        "overall_score": 11.94
       }
     },
     {
